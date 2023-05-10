@@ -8,7 +8,7 @@ import { useGLTF } from '@react-three/drei'
 
 export const Apple = (props) => {
 
-  const [ref] = useSphere(() => ({position: props.position, args: [.4], mass: 1,  linearDamping: 0.95, angularDamping: 0.95, onCollideBegin: Down, onCollideEnd: Up, ...props }))
+  const [ref] = useSphere(() => ({position: props.position, args: [.4], mass: 1,  linearDamping: 0.95, angularDamping: 0.95,linearFactor: [1, 1, 0], onCollideBegin: Down, onCollideEnd: Up, ...props }))
 
   const bind = useDragConstraint(ref)
 

@@ -8,7 +8,7 @@ import { useGLTF } from '@react-three/drei'
 
 export const Banana = (props) => {
 
-  const [ref] = useBox(() => ({position: props.pos, mass: 1,  linearDamping: 0.95, angularDamping: 0.95, args: [.4, 1, 1.5] , rotation: [0, 90, 0],  onCollideBegin: Down, onCollideEnd: Up, ...props }))
+  const [ref] = useBox(() => ({position: props.pos, mass: 1,  linearDamping: 0.95, angularDamping: 0.95, args: [.4, 1, 1.5] , linearFactor: [1, 1, 0], rotation: [0, 90, 0],  onCollideBegin: Down, onCollideEnd: Up, ...props }))
 
   const bind = useDragConstraint(ref)
   

@@ -26,7 +26,7 @@ export default function Three(props){
   const fruits = [
     {name: 'apple-1', pos: [-3,4,0], objType:'apple'},
     {name: 'apple-2', pos: [-2,4,0], objType:'apple'},
-    {name: 'banana-1', pos: [-1,3,0], objType:'banana'},
+    {name: 'banana-1', pos: [2,3,0], objType:'banana'},
   ]
 
   return (
@@ -37,7 +37,7 @@ export default function Three(props){
       shadows
       >
         <Suspense fallback={null} >
-          <Physics allowSleep={false} iterations={15} gravity={[0, -10, 0]}  >
+          <Physics allowSleep={false} iterations={15} gravity={[0, -32, 0]}  >
             {/* <Debug color="black" scale={1.1}> */}
               <OrbitControls enabled={false}  />
               <Cursor />

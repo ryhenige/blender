@@ -9,7 +9,7 @@ const state = proxy({
 })
 
 export const Box = (props) => {
-    const [ref] = useBox(() => ({type: 'Static', position: [2, .5, 0], onCollideBegin: onCollideBegin, onCollideEnd: onCollideEnd, isTrigger: true, ...props }))
+    const [ref] = useBox(() => ({type: 'Static', position: [0, .5, 0], onCollideBegin: onCollideBegin, onCollideEnd: onCollideEnd, isTrigger: true, ...props }))
     const { selected } = useSnapshot(state)
 
     const onCollideBegin = (e) => {
@@ -29,9 +29,9 @@ export const Box = (props) => {
             name='blender'
             >
                 <boxGeometry args={[1,1.8,1]} rotation={[-Math.PI / 2, 0, -.3]}/>
-                <meshPhongMaterial opacity={0} transparent />
-                <Html as='div' rotation={[0, -.5, 0]} position={[-.4, -1.8, .8]} scale={.3}  transform  >
-                    <span style={{color:'#c0c0c0'}} children={selected}></span>
+                <meshPhongMaterial opacity={0}  color={'blue'} transparent/>
+                <Html as='div' rotation={[0, 0, 0]} position={[0, -1.7, 1]} scale={.3}  transform  >
+                    <span style={{color:'white'}} children={selected}></span>
                 </Html>
             </mesh>
         </>
