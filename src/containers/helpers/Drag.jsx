@@ -22,9 +22,8 @@ function useDragConstraint(child) {
 }
 
 function Cursor() {
-  const [, api] = useSphere(() => ({ collisionFilterMask: 0, type: 'Kinematic', mass: 0, args: [0.3] }), cursor)
-  const { viewport } = useThree()
-  return useFrame(({mouse}) => {
+  const [, api] = useSphere(() => ({ collisionFilterMask: 0, type: 'Kinematic', mass: 0, args: [0.1] }), cursor)
+  return useFrame(({mouse, viewport}) => {
     const x = (mouse.x * viewport.width) / 2
     const y = (mouse.y * viewport.height) / 2
     // to keep from going through the table

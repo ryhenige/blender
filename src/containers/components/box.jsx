@@ -28,7 +28,7 @@ export const Box = (props) => {
             ref={ref}
             name='blender'
             >
-                <boxGeometry args={[1,1.8,1]} rotation={[-Math.PI / 2, 0, -.3]}/>
+                <boxGeometry args={[1,1.8,1]} rotation={[-Math.PI / 2, 0, 0]}/>
                 <meshPhongMaterial opacity={0}  color={'blue'} transparent/>
                 <Html as='div' rotation={[0, 0, 0]} position={[0, -1.7, 1]} scale={.3}  transform  >
                     <span style={{color:'white'}} children={selected}></span>

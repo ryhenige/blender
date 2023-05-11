@@ -8,7 +8,19 @@ import { useGLTF } from '@react-three/drei'
 
 export const Apple = (props) => {
 
-  const [ref] = useSphere(() => ({position: props.position, args: [.4], mass: 1,  linearDamping: 0.95, angularDamping: 0.95,linearFactor: [1, 1, 0], onCollideBegin: Down, onCollideEnd: Up, ...props }))
+  const [ref] = useSphere(() => (
+    { 
+      position: props.position, 
+      args: [.2], 
+      mass: 1,  
+      linearDamping: 0.95, 
+      angularDamping: 0.95, 
+      linearFactor: [1, 1, 0], 
+      onCollideBegin: Down, 
+      onCollideEnd: Up,  
+      ...props 
+    }
+  ))
 
   const bind = useDragConstraint(ref)
 
@@ -31,8 +43,10 @@ export const Apple = (props) => {
       ref={ref}
       {...bind}
       dispose={null}
-      scale={.01}
-      name={props.name}>
+      scale={.005}
+      name={props.name}
+      group='fruit'
+      >
       <group rotation={[-Math.PI / 2, 0, 0]}>
         <group rotation={[Math.PI / 2, 0, 0]}>
           <group position={[24.37, -39.75, -43.15]} rotation={[-Math.PI / 2, 0, -Math.PI]}>
