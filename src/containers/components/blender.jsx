@@ -1,28 +1,41 @@
-import React, { useRef } from 'react'
+import React from 'react'
 
-import blenderModel from '../../images/appliances/blender.glb'
-import { useGLTF } from '@react-three/drei'
+import blenderImage from '../../images/appliances/blender.png'
+import { TextureLoader } from 'three'
+import { useBox } from '@react-three/cannon'
 
-export function Blender({ ...props }) {
-  const group = useRef()
-  const { nodes, materials } = useGLTF(blenderModel)
-  
+export default function Blender2({ ...props }) {
+  const loader = new TextureLoader()
+  const texture = loader.load(blenderImage)
+
+  const [bottom] = useBox(() => ({type: 'Static',  position: [-1,-.7, -5], rotation: [0, 0, 0], args: [1, .05, 1], onCollideBegin: Down}))
+  const [left] = useBox(() => ({type: 'Static',  position: [-1.4,.1, -5], rotation: [0, 0, .1], args: [.05, 1.5, 1], onCollideBegin: Down}))
+  const [right] = useBox(() => ({type: 'Static',  position: [-.6,.1, -5], rotation: [0, 0, -.1], args: [.05, 1.5, 1], onCollideBegin: Down}))
+  const [front] = useBox(() => ({type: 'Static',  position: [-1,.1, -4.85], rotation: [0, Math.PI / 2, .1 ], args: [.05, 1.5, 1], onCollideBegin: Down}))
+  const [back] = useBox(() => ({type: 'Static',  position: [-1,.1, -5.3], rotation: [0, Math.PI / 2, -.1 ], args: [.05, 1.5, 1], onCollideBegin: Down}))
+
+  const Down = (e) => {
+    if(e.body?.group === 'fruit'){
+      props.add(e.body.name)
+    }
+  }
+
   return (
-    <group ref={group} {...props} dispose={null}>
-      <group rotation={[-Math.PI / 2, 0, 0]}>
-        <group rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
-          <group position={[0, -100, 0]} rotation={[-Math.PI / 2, 0, 0]} scale={100}>
-            <mesh castShadow receiveShadow geometry={nodes.Cube001_blender_0.geometry} material={materials.blender} />
-            <mesh castShadow receiveShadow geometry={nodes.Cube001_Glass_0.geometry} material={materials.Glass} />
-            <mesh castShadow receiveShadow geometry={nodes.Cube001_Metal_0.geometry} material={materials.Metal} />
-              <meshPhongMaterial color={'white'}/>
-          </group>
-        </group>
-      </group>
-    </group>
+    <>  
+      <sprite scale={[1.5,2.5]} position={[-1, -.3, -5]}>
+        <spriteMaterial attach="material" map={texture}  />
+      </sprite>
+
+     {/*  bottom platform, no sides yet */}
+      <mesh ref={bottom} />
+      <mesh ref={left} />
+      <mesh ref={right} />
+      <mesh ref={front} />
+      <mesh ref={back} />
+
+    </>
   )
 }
 
-useGLTF.preload(blenderModel)
 
 

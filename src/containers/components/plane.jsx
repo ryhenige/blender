@@ -5,7 +5,7 @@ import { useBox } from '@react-three/cannon'
 
 export const Plane = (props) => {
   
-  const [ref] = useBox(() => ({type: 'Static',  position: [0,-1.5, -5], rotation: [0, 0, 0], args: [10, .1, 1], ...props }))
+  const [ref] = useBox(() => ({type: 'Static',  position: [0,-1.3, -5], rotation: [0, 0, 0], args: [10, .1, 1], ...props }))
 
   return (
     <>

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import './App.css';
 import Three from './containers/three'
+import Produce from './images/produce/produce';
 
 const Navbar = styled.div`  
   width: 100%; 
@@ -16,6 +17,7 @@ const LeftBar = styled.div`
   width: 332px;
   border-right: 1px solid #DADCE0;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 `
@@ -48,17 +50,19 @@ const StatsBox = styled.div`
 
 function App() {
 
-  const [items, setItems] = useState([])
+  const [items, setItems] = useState([
+      {id: Date.now(), produce_id: 1},
+    ]
+  )
 
-  const add = (name) => {
-    setItems([...items, name])
+  const add = (produceType) => {
+    setItems([...items, {id: Date.now(), produce_id: produceType}])
   }
 
-  const remove = (name) => {
-    setItems(items.filter((item) => item !== name))
+  const remove = (id) => {
+    setItems(items.filter((item) => item.id !== id))
   }
 
-  console.log(items)
   return (
     <div className="App">
         <Navbar>
@@ -67,14 +71,20 @@ function App() {
         <Flex>
           <LeftBar >
             left bar
+            <button onClick={() => add(1)} >add acai</button>
+            <button onClick={() => add(2)} >add dragon fruit</button>
           </LeftBar>
           <GameBox>
-            <Three add={add} remove={remove}/>
+            <Three 
+              add={add} 
+              remove={remove}
+              items={items}
+            />
             <StatsBox >
               stats box
               <ul>
                 {items?.length> 0 && items?.map((item, index) => (
-                  <li key={index}>{item}</li> 
+                  <li key={index}>{Produce(item.produce_id).name}</li> 
                 ))}
               </ul>
             </StatsBox>

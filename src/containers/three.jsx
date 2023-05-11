@@ -1,21 +1,26 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import { Canvas, useThree } from '@react-three/fiber'
 
-import {Apple} from './components/apple'
-import {Banana} from './components/banana'
-import {Blender} from './components/blender'
-import Blender2 from './components/blender2'
-import {Box} from './components/box'
+import Blender from './components/blender'
 import { Plane } from './components/plane'
-import { Platform } from './components/platform'
-import { Cursor } from './helpers/Drag'
+import Item from './components/item'
 
 import { Debug, Physics } from '@react-three/cannon'
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
 import Background from '../images/background.png'
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
 
+function random(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
 export default function Three(props){
+
+  const [items, setItems] = useState([])
+
+  useEffect(() => { 
+    setItems(props.items)
+  }, [props.items])
 
   const SkyBox = () => {
     const { scene } = useThree()
@@ -24,12 +29,6 @@ export default function Three(props){
     scene.background = texture
     return null
   }
-
-  const fruits = [
-    {name: 'apple-1', pos: [0,2,-5], objType:'apple'},
-    {name: 'apple-2', pos: [-2,1,-5], objType:'apple'},
-    {name: 'banana-1', pos: [2,1,-5], objType:'banana'},
-  ]
 
   return (
     <>
@@ -45,23 +44,18 @@ export default function Three(props){
         />
 
         <Suspense fallback={null} >
-          <Physics allowSleep={false} iterations={15} gravity={[0, -32, 0]}  >
+          <Physics allowSleep={false} iterations={15} gravity={[0, -9.8, 0]}  >
             {/* <Debug color="black" scale={1.1}> */}
               <OrbitControls enabled={true}  />
-              <Cursor />
-              {fruits?.map(f => (
-                f.objType == 'apple' ?
-                  <Apple name={f.name} position={f.pos}/>
-                : f.objType == 'banana' ?
-                  <Banana name={f.name} position={f.pos}/>
-                :
-                <></>
-                )
-              )}
-              {/* <Blender /> */}
-              {/* <Box />  */}
-              {/* <Platform /> */}
-              <Blender2 add={props.add} remove={props.remove}/>
+              {items?.map((p, i) => (
+                <Item 
+                  add={props.add} 
+                  remove={props.remove} 
+                  item={p} 
+                  position={[random(-1.2, -.8),1,-5]}
+                />
+              ))}
+              <Blender add={props.add} />
               <Plane />
             {/* </Debug> */}
           </Physics>
