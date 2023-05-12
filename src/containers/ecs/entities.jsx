@@ -12,7 +12,7 @@ export const addItemEntity = ({world, id = nanoid(), produceId}) => {
     ECS.addComponentToEntity(world, item, 'type', produce.type)
     ECS.addComponentToEntity(world, item, 'sprite', produce.image)
     ECS.addComponentToEntity(world, item, 'position', producePosition())
-    ECS.addComponentToEntity(world, item, 'physics', true)
+    ECS.addComponentToEntity(world, item, 'gravity', true)
     ECS.addComponentToEntity(world, item, 'collider', produce.colliderSize)
     ECS.addComponentToEntity(world, item, 'scale', {x: produce.scale[0], y: produce.scale[1]})
 

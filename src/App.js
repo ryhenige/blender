@@ -58,8 +58,8 @@ function App() {
   )
 
   const add = (produceType) => {
-    // addItem(produceType)
-    setItems([...items, {id: Date.now(), produce_id: produceType}])
+    addItem(produceType)
+    // setItems([...items, {id: Date.now(), produce_id: produceType}])
   }
 
   const remove = (id) => {

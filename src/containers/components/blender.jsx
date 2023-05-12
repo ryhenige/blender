@@ -31,7 +31,7 @@ export default function Blender2({ ...props }) {
 
 
      {/*  bottom platform, no sides yet */}
-      <mesh ref={bottom} />
+      <mesh ref={bottom} name='Ground' />
       <mesh ref={left} />
       <mesh ref={right} />
       <mesh ref={front} />
