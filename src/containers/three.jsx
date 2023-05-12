@@ -1,6 +1,7 @@
 import React, { Suspense, useEffect, useState } from 'react'
 import { Canvas, useThree } from '@react-three/fiber'
 
+import EntityManager from './ecs/entityManager'
 import Blender from './components/blender'
 import { Plane } from './components/plane'
 import Item from './components/item'
@@ -47,12 +48,13 @@ export default function Three(props){
           <Physics allowSleep={false} iterations={15} gravity={[0, -9.8, 0]}  >
             {/* <Debug color="black" scale={1.1}> */}
               <OrbitControls enabled={true}  />
+              {/* <EntityManager /> */}
               {items?.map((p, i) => (
                 <Item 
                   add={props.add} 
                   remove={props.remove} 
                   item={p} 
-                  position={[random(-1.2, -.8),1,-5]}
+                  position={[random(-1.2, -.8),1,-5.2]}
                 />
               ))}
               <Blender add={props.add} />

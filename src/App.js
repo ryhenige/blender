@@ -4,6 +4,8 @@ import './App.css';
 import Three from './containers/three'
 import Produce from './images/produce/produce';
 
+import { addItem } from './containers/ecs/entityManager'
+
 const Navbar = styled.div`  
   width: 100%; 
   height: 90px;
@@ -56,6 +58,7 @@ function App() {
   )
 
   const add = (produceType) => {
+    // addItem(produceType)
     setItems([...items, {id: Date.now(), produce_id: produceType}])
   }
 

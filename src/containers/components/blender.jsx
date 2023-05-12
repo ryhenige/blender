@@ -3,6 +3,7 @@ import React from 'react'
 import blenderImage from '../../images/appliances/blender.png'
 import { TextureLoader } from 'three'
 import { useBox } from '@react-three/cannon'
+import { Html } from '@react-three/drei'
 
 export default function Blender2({ ...props }) {
   const loader = new TextureLoader()
@@ -25,6 +26,9 @@ export default function Blender2({ ...props }) {
       <sprite scale={[1.5,2.5]} position={[-1, -.3, -5]}>
         <spriteMaterial attach="material" map={texture}  />
       </sprite>
+
+
+
 
      {/*  bottom platform, no sides yet */}
       <mesh ref={bottom} />
