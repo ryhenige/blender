@@ -20,7 +20,7 @@ export default function Item({ ...props }) {
   }
 
   return (
-    <sprite scale={produce?.scale} ref={ref} onClick={remove} >
+    <sprite scale={produce?.scale} ref={ref} onClick={remove} key={produce?.id}>
       <spriteMaterial attach="material" map={produce?.texture}  />
     </sprite>
   )

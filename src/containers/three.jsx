@@ -43,6 +43,7 @@ export default function Three(props){
               <OrbitControls enabled={true}  />
               {props.items?.map((p, i) => (
                 <Item 
+                  key={p?.id}
                   add={props.add} 
                   remove={props.remove} 
                   item={p} 
