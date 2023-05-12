@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { TextureLoader } from 'three'
 import { useBox } from '@react-three/cannon'
 
 import Produce from '../../images/produce/produce'
@@ -8,9 +7,6 @@ import Produce from '../../images/produce/produce'
 export default function Item({ ...props }) {
 
   const produce = Produce(props.item?.produce_id)
-
-  const loader = new TextureLoader()
-  const texture = loader.load(produce?.image)
 
   const [ref] = useBox(() => ({
       mass: 1, 
@@ -25,7 +21,7 @@ export default function Item({ ...props }) {
 
   return (
     <sprite scale={produce?.scale} ref={ref} onClick={remove} >
-      <spriteMaterial attach="material" map={texture}  />
+      <spriteMaterial attach="material" map={produce?.texture}  />
     </sprite>
   )
 }

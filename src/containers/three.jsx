@@ -16,12 +16,6 @@ function random(min, max) {
 
 export default function Three(props){
 
-  const [items, setItems] = useState([])
-
-  useEffect(() => { 
-    setItems(props.items)
-  }, [props.items])
-
   const SkyBox = () => {
     const { scene } = useThree()
     const loader = new TextureLoader()
@@ -47,12 +41,12 @@ export default function Three(props){
           <Physics allowSleep={false} iterations={15} gravity={[0, -9.8, 0]}  >
             {/* <Debug color="black" scale={1.1}> */}
               <OrbitControls enabled={true}  />
-              {items?.map((p, i) => (
+              {props.items?.map((p, i) => (
                 <Item 
                   add={props.add} 
                   remove={props.remove} 
                   item={p} 
-                  position={[random(-1.2, -.8),1,-5]}
+                  position={[random(-1.2, -.8),1,-5.2]}
                 />
               ))}
               <Blender add={props.add} />
