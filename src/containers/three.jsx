@@ -4,6 +4,7 @@ import { Canvas, useThree } from '@react-three/fiber'
 import Blender from './components/blender'
 import { Plane } from './components/plane'
 import Item from './components/item'
+import ItemContainer from './components/itemContainer'
 
 import { Debug, Physics } from '@react-three/cannon'
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
@@ -41,6 +42,8 @@ export default function Three(props){
           <Physics allowSleep={false} iterations={15} gravity={[0, -9.8, 0]}  >
             {/* <Debug color="black" scale={1.1}> */}
               <OrbitControls enabled={true}  />
+              {/* <ItemContainer items={props.items} add={props.add} remove={props.remove} /> */}
+
               {props.items?.map((p, i) => (
                 <Item 
                   key={p?.id}

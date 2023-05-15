@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import create from 'zustand'
+import { devtools } from "zustand/middleware"
+
 import './App.css';
 import Three from './containers/three'
 import Produce from './images/produce/produce';
@@ -48,6 +51,8 @@ const StatsBox = styled.div`
   justify-content: center;
   overflow-y: scroll;
 `
+
+
 
 function App() {
 
