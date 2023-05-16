@@ -1,11 +1,9 @@
-import { useState } from 'react';
-import styled from 'styled-components';
-import create from 'zustand'
-import { devtools } from "zustand/middleware"
+import styled from 'styled-components'
 
 import './App.css';
 import Three from './containers/three'
-import Produce from './images/produce/produce';
+import Produce from './images/produce/produce'
+import { useItemsStore } from './containers/stores'
 
 const Navbar = styled.div`  
   width: 100%; 
@@ -15,7 +13,6 @@ const Navbar = styled.div`
   align-items: center;
   justify-content: center;
 `
-
 const LeftBar = styled.div`
   width: 332px;
   border-right: 1px solid #DADCE0;
@@ -24,12 +21,10 @@ const LeftBar = styled.div`
   align-items: center;
   justify-content: center;
 `
-
 const Flex = styled.div`    
   display: flex;  
   flex-direction: row;
 `
-
 const GameBox = styled.div`
   width: calc(100vw - 332px);
   height: calc(100vh - 91px);
@@ -52,21 +47,13 @@ const StatsBox = styled.div`
   overflow-y: scroll;
 `
 
-
-
 function App() {
 
-  const [items, setItems] = useState([
-      {id: Date.now(), produce_id: 1},
-    ]
-  )
+  const items = useItemsStore((state) => state.items)
+  const addItem = useItemsStore((state) => state.addItem)
 
   const add = (produceType) => {
-    setItems([...items, {id: Date.now(), produce_id: produceType}])
-  }
-
-  const remove = (id) => {
-    setItems(items.filter((item) => item.id !== id))
+    addItem(produceType)
   }
 
   return (
@@ -81,11 +68,7 @@ function App() {
             <button onClick={() => add(2)} >add dragon fruit</button>
           </LeftBar>
           <GameBox>
-            <Three 
-              add={add} 
-              remove={remove}
-              items={items}
-            />
+            <Three />
             <StatsBox >
               stats box
               <ul>

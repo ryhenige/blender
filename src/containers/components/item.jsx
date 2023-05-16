@@ -1,11 +1,12 @@
 import React from 'react'
-
 import { useBox } from '@react-three/cannon'
 
 import Produce from '../../images/produce/produce'
+import { useItemsStore } from '../stores';
 
 export default function Item({ ...props }) {
 
+  const removeItem = useItemsStore((state) => state.removeItem)
   const produce = Produce(props.item?.produce_id)
 
   const [ref] = useBox(() => ({
@@ -16,7 +17,7 @@ export default function Item({ ...props }) {
    }))
 
   const remove = () => {
-    props.remove(props.item?.id)
+    removeItem(props.item?.id)
   }
 
   return (

@@ -1,24 +1,20 @@
-import Item from './item';
+import Item from './item'
+import { useItemsStore } from '../stores'
 
 function random(min, max) {
-    return Math.random() * (max - min) + min;
+    return Math.random() * (max - min) + min
 }
 
-export default function ItemContainer({ items, add, remove }) {
-  const arr = [];
+export default function ItemContainer() {
+  const allItems = useItemsStore((state) => state.items)
 
-  items.forEach(p => {
-    arr.push(
+  return (
+    allItems?.map(p => (
       <Item 
           key={p?.id}
-          add={add} 
-          remove={remove} 
           item={p} 
           position={[random(-1.2, -.8),1,-5.2]}
       />
-    )
-  })
-  
-
-  return <>{arr}</>;
+    ))
+  )
 }

@@ -1,6 +1,5 @@
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
 
-
 import acai from './acai-small.png'
 import dragonFruit from './dragon-fruit-small.png'
 

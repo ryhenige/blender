@@ -1,19 +1,14 @@
-import React, { Suspense, useEffect, useState } from 'react'
+import React, { Suspense } from 'react'
 import { Canvas, useThree } from '@react-three/fiber'
 
 import Blender from './components/blender'
 import { Plane } from './components/plane'
-import Item from './components/item'
 import ItemContainer from './components/itemContainer'
 
 import { Debug, Physics } from '@react-three/cannon'
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
 import Background from '../images/background.png'
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
-
-function random(min, max) {
-  return Math.random() * (max - min) + min;
-}
 
 export default function Three(props){
 
@@ -42,17 +37,7 @@ export default function Three(props){
           <Physics allowSleep={false} iterations={15} gravity={[0, -9.8, 0]}  >
             {/* <Debug color="black" scale={1.1}> */}
               <OrbitControls enabled={true}  />
-              {/* <ItemContainer items={props.items} add={props.add} remove={props.remove} /> */}
-
-              {props.items?.map((p, i) => (
-                <Item 
-                  key={p?.id}
-                  add={props.add} 
-                  remove={props.remove} 
-                  item={p} 
-                  position={[random(-1.2, -.8),1,-5.2]}
-                />
-              ))}
+              <ItemContainer />
               <Blender add={props.add} />
               <Plane />
             {/* </Debug> */}
