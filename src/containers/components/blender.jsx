@@ -1,12 +1,12 @@
 import React from 'react'
 
 import blenderImage from '../../images/appliances/blender.png'
-import { TextureLoader } from 'three'
 import { useBox } from '@react-three/cannon'
+import { useTexture } from '@react-three/drei'
 
 export default function Blender2({ ...props }) {
-  const loader = new TextureLoader()
-  const texture = loader.load(blenderImage)
+
+  const texture = useTexture(blenderImage)
 
   const [bottom] = useBox(() => ({type: 'Static',  position: [-1,-.7, -5], rotation: [0, 0, 0], args: [1, .05, 1], onCollideBegin: Down}))
   const [left] = useBox(() => ({type: 'Static',  position: [-1.4,.1, -5], rotation: [0, 0, .1], args: [.05, 1.5, 1], onCollideBegin: Down}))

@@ -6,16 +6,14 @@ import { Plane } from './components/plane'
 import ItemContainer from './components/itemContainer'
 
 import { Debug, Physics } from '@react-three/cannon'
-import { TextureLoader } from 'three/src/loaders/TextureLoader'
 import Background from '../images/background.png'
-import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
+import { OrbitControls, PerspectiveCamera, useTexture } from '@react-three/drei'
 
 export default function Three(props){
 
   const SkyBox = () => {
     const { scene } = useThree()
-    const loader = new TextureLoader()
-    const texture = loader.load(Background)
+    const texture = useTexture(Background)
     scene.background = texture
     return null
   }
