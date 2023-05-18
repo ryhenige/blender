@@ -1,13 +1,9 @@
 import React from 'react'
-
-import Produce, { ProduceTypeCount } from '../../images/produce/produce'
 import { useTexture } from '@react-three/drei'
 
-const arrayRange = (start, stop, step) =>
-    Array.from(
-    { length: (stop - start) / step + 1 },
-    (value, index) => start + index * step
-)
+import Produce, { ProduceTypeCount } from '../../images/produce/produce'
+import { ArrayRange } from '../helpers'
+
 
 const Sprite = (props) => {
   const produce = Produce(props?.id)
@@ -21,7 +17,7 @@ const Sprite = (props) => {
 
 export default function PreloadSprites({ ...props }) {
   return (
-    arrayRange(1, ProduceTypeCount, 1).map(id => ( 
+    ArrayRange(1, ProduceTypeCount, 1).map(id => ( 
       <Sprite id={id} /> 
     ))
   )

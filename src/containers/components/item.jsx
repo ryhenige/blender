@@ -1,13 +1,10 @@
 import React, { useEffect } from 'react'
 import { useBox } from '@react-three/cannon'
+import { useTexture } from '@react-three/drei'
 
 import Produce from '../../images/produce/produce'
 import { useItemsStore } from '../stores'
-import { useTexture } from '@react-three/drei'
-
-function random(min, max) {
-  return Math.random() * (max - min) + min
-}
+import { Random } from '../helpers'
 
 export default function Item({ ...props }) {
 
@@ -20,7 +17,7 @@ export default function Item({ ...props }) {
 
   const [ref, api] = useBox(() => ({
     mass: 1, 
-    position: [random(-1.2, -.8),1,-5.2], 
+    position: [Random(-1.2, -.8),1,-5.2], 
     args: produce?.colliderSize, 
   }))
 

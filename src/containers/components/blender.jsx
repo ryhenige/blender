@@ -1,11 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useBox } from '@react-three/cannon'
+import { useTexture, Html } from '@react-three/drei'
 
 import blenderImage from '../../images/appliances/blender.png'
 import blenderLidImage from '../../images/appliances/blender-lid.png'
-import { useBox } from '@react-three/cannon'
-import { useTexture, Html } from '@react-three/drei'
 import { useItemsStore } from '../stores'
+import BlendedItems from './blendedItems'
 
 const StyledButton = styled.div`
   position: absolute;
@@ -59,8 +60,17 @@ const Onlight = styled.div`
   left: 27px;
   background-color: ${props => props.blending ? '#35e035' : 'red'};
   box-shadow: 0px 0px 4px 2px ${props => props.blending ? '#35e035' : 'red'};
+  ${props => props.blending && `
+    animation: blinker 1s linear infinite;
+  `}
+  @keyframes blinker {
+    50% {
+      opacity: 80%;
+    }
+  }
 `
-export default function Blender2({ ...props }) {
+
+export default function Blender({ ...props }) {
 
   const allItems = useItemsStore((state) => state.items)
   const blending = useItemsStore((state) => state.blending)
@@ -101,21 +111,26 @@ export default function Blender2({ ...props }) {
         <spriteMaterial attach="material" map={texture}  />
       </sprite>
 
-     {/*  bottom platform, no sides yet */}
-      <mesh ref={bottom} >
-        <Html>
-          <ServingBox>
-            <Text>{allItems?.length}</Text>
-            <Text>Servings</Text>
-          </ServingBox>
-          <Onlight blending={blending} />
-          <StyledButton onClick={ToggleBlender}>Blend</StyledButton>
-        </Html>
-      </mesh>
-      <mesh ref={left} />
-      <mesh ref={right} />
-      <mesh ref={front} />
-      <mesh ref={back} />
+     <group>
+        <mesh ref={bottom} >
+          <Html>
+            <ServingBox>
+              <Text>{allItems?.length}</Text>
+              <Text>Servings</Text>
+            </ServingBox>
+            <Onlight blending={blending} />
+            <StyledButton onClick={ToggleBlender}>Blend</StyledButton>
+          </Html>
+
+          <Html as='div'  position={[-2,1,-8]} >
+            <BlendedItems />
+          </Html>
+        </mesh>
+        <mesh ref={left} />
+        <mesh ref={right} />
+        <mesh ref={front} />
+        <mesh ref={back} />
+     </group>
 
     </>
   )
