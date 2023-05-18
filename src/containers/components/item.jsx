@@ -1,33 +1,40 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useBox } from '@react-three/cannon'
 
 import Produce from '../../images/produce/produce'
 import { useItemsStore } from '../stores'
 import { useTexture } from '@react-three/drei'
 
+function random(min, max) {
+  return Math.random() * (max - min) + min
+}
+
 export default function Item({ ...props }) {
 
   const removeItem = useItemsStore((state) => state.removeItem)
   const blending = useItemsStore((state) => state.blending)
-  const [bool, setBool] = useState(true)
+  let bool = true
   
   const produce = Produce(props.item?.produce_id)
   const texture = useTexture(produce?.texture)
 
   const [ref, api] = useBox(() => ({
     mass: 1, 
-    position: props.position, 
-    rotation: props.rotation, 
+    position: [random(-1.2, -.8),1,-5.2], 
     args: produce?.colliderSize, 
   }))
+
+  const Pulse = () => {
+    const direction = bool ? [-4, 3, 0] : [4, -1, 0];
+    api.applyImpulse(direction, [0, 0, 0])
+    bool = !bool
+  }
 
   useEffect(() => {
     if(!blending) return
     const interval = setInterval(() => {
-      api.applyImpulse([bool ? -4 : 4, 2, 0], [0, 0, 0]) 
-      setBool(!bool)
-    }
-    , 500)
+      Pulse()
+    }, 500)
     return () => {
       clearInterval(interval);
     }

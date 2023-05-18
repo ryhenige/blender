@@ -1,6 +1,9 @@
 import acai from './acai-small.png'
 import dragonFruit from './dragon-fruit-small.png'
 
+// update this to the total number of produce types. It is used to loop through and preload all the produce textures
+export const ProduceTypeCount = 2
+
 export default function Produce (produceId) {
 
     switch (produceId) {

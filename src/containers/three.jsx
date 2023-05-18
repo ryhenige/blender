@@ -1,10 +1,11 @@
 import React, { Suspense } from 'react'
 import { Canvas, useThree } from '@react-three/fiber'
-import { OrbitControls, PerspectiveCamera, useTexture } from '@react-three/drei'
+import { OrbitControls, PerspectiveCamera, useTexture, Preload } from '@react-three/drei'
 
 import Blender from './components/blender'
 import { Plane } from './components/plane'
 import ItemContainer from './components/itemContainer'
+import PreloadSprites from './components/preloadSprites'
 
 import { Debug, Physics } from '@react-three/cannon'
 import Background from '../images/background.png'
@@ -32,6 +33,7 @@ export default function Three(props){
         />
 
         <Suspense fallback={null} >
+          <Preload all />
           <Physics allowSleep={false} iterations={15} gravity={[0, -9.8, 0]}  >
             {/* <Debug color="black" scale={1.1}> */}
               <OrbitControls enabled={true}  />
@@ -41,6 +43,7 @@ export default function Three(props){
             {/* </Debug> */}
           </Physics>
 
+          <PreloadSprites />
           <ambientLight args={["#ffffff", 0.6]} />
           <directionalLight args={["#ffffff", .4]} position={[3,10,4]} castShadow/>
           <SkyBox />

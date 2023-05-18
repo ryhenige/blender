@@ -12,5 +12,5 @@ export const useItemsStore = create(devtools((set) => ({
     set((state) => { return { items: state.items.filter((item) => item.id !== id)}}),
   removeAllItems: () => set({ items: [] }),
   toggleBlending: () => set((state) => ({blending: !state.blending})),
-  disableBlending: () => set({blending: false}),
+  disableBlending: () => set({blending: false})
 })))
