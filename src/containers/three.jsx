@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react'
 import { Canvas, useThree } from '@react-three/fiber'
+import { OrbitControls, PerspectiveCamera, useTexture } from '@react-three/drei'
 
 import Blender from './components/blender'
 import { Plane } from './components/plane'
@@ -7,7 +8,6 @@ import ItemContainer from './components/itemContainer'
 
 import { Debug, Physics } from '@react-three/cannon'
 import Background from '../images/background.png'
-import { OrbitControls, PerspectiveCamera, useTexture } from '@react-three/drei'
 
 export default function Three(props){
 
@@ -36,7 +36,7 @@ export default function Three(props){
             {/* <Debug color="black" scale={1.1}> */}
               <OrbitControls enabled={true}  />
               <ItemContainer />
-              <Blender add={props.add} />
+              <Blender />
               <Plane />
             {/* </Debug> */}
           </Physics>

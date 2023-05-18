@@ -4,6 +4,7 @@ import './App.css';
 import Three from './containers/three'
 import Produce from './images/produce/produce'
 import { useItemsStore } from './containers/stores'
+import Background from './images/background.png'
 
 const Navbar = styled.div`  
   width: 100%; 
@@ -30,6 +31,7 @@ const GameBox = styled.div`
   height: calc(100vh - 91px);
   background-color: #F5F5F5;
   position: relative;
+  // background-image: url(${Background});
 `
 const StatsBox = styled.div`
   background-color: #FFFFFF;
@@ -42,17 +44,23 @@ const StatsBox = styled.div`
   right: 20%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  overflow-y: scroll;
+  .title {
+    padding: 10px;
+  }
+  div {
+    overflow-y: scroll;
+    height: 80%;
+  }
 `
 
 function App() {
 
   const items = useItemsStore((state) => state.items)
   const addItem = useItemsStore((state) => state.addItem)
+  const disableBlending = useItemsStore((state) => state.disableBlending)
 
   const add = (produceType) => {
+    disableBlending()
     addItem(produceType)
   }
 
@@ -63,19 +71,22 @@ function App() {
         </Navbar>
         <Flex>
           <LeftBar >
-            left bar
             <button onClick={() => add(1)} >add acai</button>
             <button onClick={() => add(2)} >add dragon fruit</button>
           </LeftBar>
           <GameBox>
             <Three />
             <StatsBox >
-              stats box
-              <ul>
-                {items?.length> 0 && items?.map((item, index) => (
-                  <li key={index}>{Produce(item.produce_id).name}</li> 
-                ))}
-              </ul>
+              <span className='title'>
+              Stats Box
+              </span>
+              <div>
+                <ul>
+                  {items?.length> 0 && items?.map((item, index) => (
+                    <li key={index}>{Produce(item.produce_id).name}</li> 
+                  ))}
+                </ul>
+              </div>
             </StatsBox>
           </GameBox>
         </Flex>
