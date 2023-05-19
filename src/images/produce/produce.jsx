@@ -9,11 +9,11 @@ export default function Produce (produceId) {
 
     switch (produceId) {
         case 1:
-            return { name: 'Acai', texture: acai, produceType: 'fruit', colliderSize: [.2, .15, .2], scale: [.4,.4]}
+            return { name: 'Acai', texture: acai, produceType: 'fruit', colliderSize: [.2, .15, .2], scale: [.4,.4], color: 'blue'}
         case 2:
-            return { name: 'Dragon Fruit', texture: dragonFruit, produceType: 'fruit', colliderSize: [.2, .15, .2], scale: [.4,.4]}
+            return { name: 'Dragon Fruit', texture: dragonFruit, produceType: 'fruit', colliderSize: [.2, .15, .2], scale: [.4,.4], color: 'red'}
         case 3:
-            return { name: 'Wakame', texture: wakame, produceType: 'vegetable', colliderSize: [.2, .15, .2], scale: [.4,.4]}
+            return { name: 'Wakame', texture: wakame, produceType: 'vegetable', colliderSize: [.2, .15, .2], scale: [.4,.4], color: 'green'}
         default:
             break;
     }

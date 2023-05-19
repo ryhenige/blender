@@ -17,11 +17,13 @@ export const useItemsStore = create(devtools((set) => ({
     set({ blending: false })
     set((state) => { 
       const produceCount = state.items.length
-      const fruitCount = state.items.filter((item) => item.produceType === 'fruit').length
-      const vegetableCount = state.items.filter((item) => item.produceType === 'vegetable').length
+      const redCount   = state.items.filter((item) => item.color === 'red').length
+      const greenCount = state.items.filter((item) => item.color === 'green').length
+      const blueCount  = state.items.filter((item) => item.color === 'blue').length
       return { itemTypes: [
-                  {type: 'Fruit', count: fruitCount, percentage: CalculatePercentToTen(fruitCount, produceCount), color: '#fa0202'}, 
-                  {type: 'Vegetable', count: vegetableCount, percentage: CalculatePercentToTen(vegetableCount, produceCount), color: '#19f705'}
+                  {type: 'red', count: redCount, percentage: CalculatePercentToTen(redCount, produceCount), color: '#EC4730'}, 
+                  {type: 'green', count: greenCount, percentage: CalculatePercentToTen(greenCount, produceCount), color: '#81CA4C'},
+                  {type: 'blue', count: blueCount, percentage: CalculatePercentToTen(blueCount, produceCount), color: '#44ACFA'}
               ]
       }})
       set({ items: [] })

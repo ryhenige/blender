@@ -22,7 +22,7 @@ export default function Item({ ...props }) {
   }))
 
   const Pulse = () => {
-    const direction = bool ? [-4, 3, 0] : [4, -1, 0];
+    const direction = bool ? [-5, 4, 0] : [5, 0, 0];
     api.applyImpulse(direction, [0, 0, 0])
     bool = !bool
   }

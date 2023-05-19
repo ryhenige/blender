@@ -31,9 +31,9 @@ export default function BlendedItems({ ...props }) {
     }
 
     const FillLayer = (props) => {
-        const rowTexture = useTexture(Rows[props.index + 1])
+        const rowTexture = useTexture(Rows[10 - props.index])
         return ( 
-            <sprite scale={[1.1,.15]} position={[-.02, (1.4 - .15 * props.index), -.1]}>
+            <sprite scale={[1.1,.15]} position={[-.02, (.1 + .15 * props.index), -.1]}>
                 <spriteMaterial attach="material" opacity={.7} map={rowTexture} color={props.color} />
             </sprite>
         )
