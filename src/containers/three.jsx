@@ -35,12 +35,12 @@ export default function Three(props){
         <Suspense fallback={null} >
           <Preload all />
           <Physics allowSleep={false} iterations={15} gravity={[0, -9.8, 0]} >
-            <Debug color="black" scale={1.1}>
+            {/* <Debug color="black" scale={1.1}> */}
               <OrbitControls enabled={true}  />
               <ItemContainer />
               <Blender />
               <Plane />
-            </Debug>
+            {/* </Debug> */}
           </Physics>
 
           <PreloadSprites />
