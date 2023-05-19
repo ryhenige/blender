@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useBox } from '@react-three/cannon'
+import { useBox, useSphere } from '@react-three/cannon'
 import { useTexture } from '@react-three/drei'
 
 import Produce from '../../images/produce/produce'
@@ -15,10 +15,11 @@ export default function Item({ ...props }) {
   const produce = Produce(props.item?.produce_id)
   const texture = useTexture(produce?.texture)
 
-  const [ref, api] = useBox(() => ({
+  const [ref, api] = useSphere(() => ({
     mass: 1, 
     position: [Random(-1.2, -.8),1,-5.2], 
-    args: produce?.colliderSize, 
+    args: produce.colliderSize, 
+    material: { friction: 0.5},
   }))
 
   const Pulse = () => {
