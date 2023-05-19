@@ -122,9 +122,7 @@ export default function Blender({ ...props }) {
             <StyledButton onClick={ToggleBlender}>Blend</StyledButton>
           </Html>
 
-          <Html as='div'  position={[-2,1,-8]} >
-            <BlendedItems />
-          </Html>
+          <BlendedItems />
         </mesh>
         <mesh ref={left} />
         <mesh ref={right} />

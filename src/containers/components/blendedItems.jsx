@@ -1,29 +1,8 @@
 import React, { useEffect } from 'react'
-import styled from 'styled-components'
 import { useItemsStore } from '../stores'
-
-const Container = styled.div`
-    position: absolute;
-    top: -135px;
-    left: -45px;
-    height: 250px;
-    width: 150px;
-    display: flex;
-    flex-direction: column;
-`
-const Liquid = styled.div`
-    width: 100%;
-    height: ${props => props.percent}%;
-    background-color: ${props => props.color};
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 50%;
-    border-radius: 5px;
-    span {
-        opacity: 100%;
-    }
-`
+import { useTexture } from '@react-three/drei'
+import Rows from '../../images/appliances/fill/fillLayers'
+import { ArrayRange } from '../../containers/helpers';
 
 export default function BlendedItems({ ...props }) {
 
@@ -41,17 +20,30 @@ export default function BlendedItems({ ...props }) {
         }
     }, [blending])
 
+    const ColorMap = () => {
+        const colors = []
+        itemTypes?.forEach((item) => {
+            ArrayRange(1, item.percentage, 1).map(i =>
+                colors.push(item.color)
+            )
+        })
+        return colors.slice(0,10)
+    }
+
+    const FillLayer = (props) => {
+        const rowTexture = useTexture(Rows[props.index + 1])
+        return ( 
+            <sprite scale={[1.1,.15]} position={[-.02, (1.4 - .15 * props.index), -.1]}>
+                <spriteMaterial attach="material" opacity={.7} map={rowTexture} color={props.color} />
+            </sprite>
+        )
+    }
+
     return (
-        <Container>
-            {itemTypes?.map((type, i) => (
-                <Liquid 
-                    percent={type?.percentage} 
-                    color={type?.color}>
-                    {type?.count > 0 && 
-                        <span>{type?.percentage}% {type?.type}</span>
-                    }
-                </Liquid>
+        <>
+            {ColorMap().map((c, i) => (
+                <FillLayer color={c} index={i} />
             ))}
-        </Container>
+        </>
     )
 }

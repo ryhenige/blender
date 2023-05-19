@@ -2,6 +2,7 @@ import { devtools } from "zustand/middleware"
 import create from 'zustand'
 
 import Produce from '../images/produce/produce'
+import { CalculatePercentToTen } from "./helpers"
 
 export const useItemsStore = create(devtools((set) => ({
   items: [],
@@ -19,8 +20,8 @@ export const useItemsStore = create(devtools((set) => ({
       const fruitCount = state.items.filter((item) => item.produceType === 'fruit').length
       const vegetableCount = state.items.filter((item) => item.produceType === 'vegetable').length
       return { itemTypes: [
-                  {type: 'Fruit', count: fruitCount, percentage: Math.round((fruitCount / produceCount) * 100), color: 'red'}, 
-                  {type: 'Vegetable', count: vegetableCount, percentage: Math.round((vegetableCount / produceCount) * 100), color: 'green'}
+                  {type: 'Fruit', count: fruitCount, percentage: CalculatePercentToTen(fruitCount, produceCount), color: '#fa0202'}, 
+                  {type: 'Vegetable', count: vegetableCount, percentage: CalculatePercentToTen(vegetableCount, produceCount), color: '#19f705'}
               ]
       }})
       set({ items: [] })
